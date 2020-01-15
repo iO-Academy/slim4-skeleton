@@ -10,25 +10,28 @@ use Psr\Log\LoggerInterface;
 use Slim\Views\PhpRenderer;
 
 return function (ContainerBuilder $containerBuilder) {
-    $containerBuilder->addDefinitions([
-        LoggerInterface::class => function (ContainerInterface $c) {
-            $settings = $c->get('settings');
+    $container = [];
 
-            $loggerSettings = $settings['logger'];
-            $logger = new Logger($loggerSettings['name']);
+    $container[LoggerInterface::class] = function (ContainerInterface $c) {
+        $settings = $c->get('settings');
 
-            $processor = new UidProcessor();
-            $logger->pushProcessor($processor);
+        $loggerSettings = $settings['logger'];
+        $logger = new Logger($loggerSettings['name']);
 
-            $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
-            $logger->pushHandler($handler);
+        $processor = new UidProcessor();
+        $logger->pushProcessor($processor);
 
-            return $logger;
-        },
-        'renderer' => function (ContainerInterface $c){
-            $settings = $c->get('settings')['renderer'];
-            $renderer = new PhpRenderer($settings['template_path']);
-            return $renderer;
-        },
-    ]);
+        $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
+        $logger->pushHandler($handler);
+
+        return $logger;
+    };
+
+    $container['renderer'] = function (ContainerInterface $c) {
+        $settings = $c->get('settings')['renderer'];
+        $renderer = new PhpRenderer($settings['template_path']);
+        return $renderer;
+    };
+
+    $containerBuilder->addDefinitions($container);
 };
