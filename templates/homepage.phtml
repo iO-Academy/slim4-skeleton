@@ -27,6 +27,11 @@
 </head>
 <body>
 <h1>Slim</h1>
+<?php
+if (!empty($name)) {
+    echo '<h2>Welcome ' . ucfirst($name) . '!</h2>';
+}
+?>
 <div>a microframework for PHP</div>
     <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
 </body>

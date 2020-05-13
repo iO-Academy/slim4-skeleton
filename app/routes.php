@@ -9,7 +9,13 @@ return function (App $app) {
 
     $app->get('/', function ($request, $response, $args) use ($container) {
         $renderer = $container->get('renderer');
-        return $renderer->render($response, "index.php", $args);
+        return $renderer->render($response, "homepage.phtml");
+    });
+
+
+    $app->get('/{name}', function ($request, $response, $args) use ($container) {
+        $renderer = $container->get('renderer');
+        return $renderer->render($response, "homepage.phtml", $args);
     });
 
 };
