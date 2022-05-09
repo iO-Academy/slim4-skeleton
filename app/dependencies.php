@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Factories\PDOFactory;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -32,6 +33,8 @@ return function (ContainerBuilder $containerBuilder) {
         $renderer = new PhpRenderer($settings['template_path']);
         return $renderer;
     };
+
+    $container['PDO'] = DI\factory(PDOFactory::class);
 
     $containerBuilder->addDefinitions($container);
 };
