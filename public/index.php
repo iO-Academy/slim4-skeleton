@@ -4,6 +4,9 @@ declare(strict_types=1);
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Http\Factory\DecoratedResponseFactory;
+use Slim\Psr7\Factory\ResponseFactory;
+use Slim\Psr7\Factory\StreamFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -29,9 +32,15 @@ $repositories($containerBuilder);
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
+$responseFactory = new ResponseFactory();
+$streamFactory = new StreamFactory();
+
+$decoratedResponseFactory = new DecoratedResponseFactory($responseFactory, $streamFactory);
+
+
 // Instantiate the app
 AppFactory::setContainer($container);
-$app = AppFactory::create();
+$app = AppFactory::create($decoratedResponseFactory);
 $callableResolver = $app->getCallableResolver();
 
 // Register middleware
