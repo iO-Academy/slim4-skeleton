@@ -12,4 +12,6 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
+    $app->get('/courses', \App\Controllers\CoursesAPIController::class);
+
 };
