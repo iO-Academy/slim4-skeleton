@@ -11,6 +11,8 @@ use Psr\Container\ContainerInterface;
 
 class PDOFactory
 {
+    // This factory is needed as autowiring is only able to automatically fetch dependencies that are
+    // fully type hinted classes
     public function __invoke(ContainerInterface $container): PDO
     {
         $settings = $container->get('settings')['db'];

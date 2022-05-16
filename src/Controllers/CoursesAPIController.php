@@ -14,6 +14,7 @@ class CoursesAPIController
 {
     protected CoursesModel $model;
 
+    // Here, the parameter is automatically supplied by the Dependency Injection Container based on the type hint
     public function __construct(CoursesModel $model)
     {
         $this->model = $model;
