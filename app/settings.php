@@ -19,7 +19,7 @@ return function (ContainerBuilder $containerBuilder) {
             ],
             'db' => [
                 'host' => 'mysql:host=127.0.0.1;',
-                'name' => 'dbname=cheeses',
+                'name' => 'dbname=example',
                 'user' => 'root',
                 'password' => 'password',
                 'debug' => true
