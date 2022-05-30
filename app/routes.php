@@ -9,7 +9,7 @@ return function (App $app) {
     $container = $app->getContainer();
 
     $app->get('/', function ($request, $response, $args) use ($container) {
-        $renderer = $container->get('renderer');
+        $renderer = $container->get('Slim\Views\PhpRenderer');
         return $renderer->render($response, "index.php", $args);
     });
 
