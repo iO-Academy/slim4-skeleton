@@ -12,10 +12,9 @@ class CoursesModel
 {
     protected PDO $db;
 
-    // Here, the parameter is automatically supplied by the Dependency Injection Container based on the type hint
-    public function __construct(PDO $db)
+    public function __construct()
     {
-        $this->db = $db;
+
     }
 
     /**
