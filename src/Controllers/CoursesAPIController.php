@@ -6,16 +6,16 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 
-use App\Models\CoursesModel;
+use App\Models\BooksModel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class CoursesAPIController
 {
-    private CoursesModel $model;
+    private BooksModel $model;
 
     // Here, the parameter is automatically supplied by the Dependency Injection Container based on the type hint
-    public function __construct(CoursesModel $model)
+    public function __construct(BooksModel $model)
     {
         $this->model = $model;
     }
