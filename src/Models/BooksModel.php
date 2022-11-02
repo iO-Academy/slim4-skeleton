@@ -1,8 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-
 namespace App\Models;
 use PDO;
 
@@ -22,5 +19,10 @@ class BooksModel
         return $query->fetchAll();
     }
 
+    public function addBookToDB()
+    {
+        $query = $this->db->prepare('INSERT INTO `name`, `author`, `price`, `image`');
+        $query->execute();
+    }
 
 }
